@@ -2,14 +2,16 @@
 FROM python:3.10-slim
 
 # Stop Python buffering stdout/stderr
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED=1 \
+    PORT=8080
 
 WORKDIR /app
 
 # Install system deps
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential ffmpeg \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      build-essential ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install
 COPY requirements.txt .
@@ -22,6 +24,9 @@ COPY best.pt .
 # Expose the port Fly expects
 EXPOSE 8080
 
-# Launch Uvicorn with 4 workers
-CMD ["uvicorn", "app.main:app", \
-     "--host", "0.0.0.0", "--port", "8080", "--workers", "4"]
+# Use exec form so signals are forwarded correctly.
+ENTRYPOINT ["sh","-c","exec uvicorn app.main:app \
+  --host 0.0.0.0 \
+  --port ${PORT} \
+  --workers 4 \
+  --log-level info"]
