@@ -90,13 +90,9 @@ You can set these in a `.env` or as secrets in Fly.io.
 ```http
 POST /segment HTTP/1.1
 Content-Type: multipart/form-data; boundary=---XYZ
-
------XYZ
 Content-Disposition: form-data; name="file"; filename="image.jpg"
 Content-Type: image/jpeg
 
-<...binary image bytes...>
------XYZ--
 ```
 
 #### Response (200 OK)
