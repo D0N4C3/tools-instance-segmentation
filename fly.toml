@@ -1,0 +1,25 @@
+app = "tools-ai-api"      # ← replace
+primary_region = "iad"
+
+[build]
+  image = "Dockerfile"
+
+[env]
+  LOG_LEVEL = "info"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.tcp_checks]]
+    interval = "10s"
+    timeout = "2s"
+    restart_limit = 0

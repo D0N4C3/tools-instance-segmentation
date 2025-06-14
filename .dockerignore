@@ -1,0 +1,6 @@
+__pycache__/
+.venv310/
+*.pyc
+*.pyo
+.env
+.git
