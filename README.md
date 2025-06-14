@@ -106,12 +106,12 @@ Content-Type: image/jpeg
   {
     "class": "Hammer",
     "confidence": 0.97,
-    "polygon": [[12,34],[15,37],]
+    "polygon": [[12,34],[15,37]]
   },
   {
     "class": "Drill",
     "confidence": 0.82,
-    "polygon": [[100,200],[105,205],]
+    "polygon": [[100,200],[105,205]]
   }
 ]
 ```
