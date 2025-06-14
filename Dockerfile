@@ -21,12 +21,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY best.pt .
 
-# Expose the port Fly expects
+# Expose (for documentation only—Fly will map the real port)
 EXPOSE 8080
 
-# Use exec form so signals are forwarded correctly.
+# Entrypoint: bind to 0.0.0.0, pick up $PORT at runtime (default to 8080 if unset).
+# No --workers so uvicorn runs in-process and actually binds.
 ENTRYPOINT ["sh","-c","exec uvicorn app.main:app \
   --host 0.0.0.0 \
-  --port ${PORT} \
-  --workers 4 \
+  --port ${PORT:-8080} \
   --log-level info"]
