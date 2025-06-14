@@ -22,7 +22,7 @@ primary_region = 'arn'
 
 [[services]]
   protocol = 'tcp'
-  internal_port = 8000
+  internal_port = 8080
 
   [[services.ports]]
     port = 80

@@ -20,8 +20,8 @@ COPY app ./app
 COPY best.pt .
 
 # Expose the port Fly expects
-EXPOSE 8000
+EXPOSE 8080
 
 # Launch Uvicorn with 4 workers
 CMD ["uvicorn", "app.main:app", \
-     "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+     "--host", "0.0.0.0", "--port", "8080", "--workers", "4"]
